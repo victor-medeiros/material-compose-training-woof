@@ -32,8 +32,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -61,9 +63,19 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun WoofApp() {
-    LazyColumn(Modifier.background(MaterialTheme.colors.background)) {
-        items(dogs) {
-            DogItem(dog = it)
+    Scaffold(
+        topBar = {
+            WoofTopAppBar()
+        }
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .padding(paddingValues)
+        ) {
+            items(dogs) {
+                DogItem(dog = it)
+            }
         }
     }
 }
@@ -132,6 +144,27 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
         Text(
             text = stringResource(R.string.years_old, dogAge),
             style = MaterialTheme.typography.body1
+        )
+    }
+}
+
+@Composable
+fun WoofTopAppBar(modifier: Modifier = Modifier) {
+    Row(modifier = modifier
+        .fillMaxWidth()
+        .background(MaterialTheme.colors.primary),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .size(64.dp)
+                .padding(8.dp),
+            painter = painterResource(id = R.drawable.ic_woof_logo),
+            contentDescription = "Woof app logo"
+        )
+        Text(
+            text = stringResource(id = R.string.app_name),
+            style = MaterialTheme.typography.h1
         )
     }
 }
