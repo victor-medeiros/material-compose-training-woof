@@ -126,10 +126,12 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
     Column {
         Text(
             text = stringResource(dogName),
-            modifier = modifier.padding(top = 8.dp)
+            modifier = modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.h2
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
+            style = MaterialTheme.typography.body1
         )
     }
 }
@@ -137,7 +139,7 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
 /**
  * Composable that displays what the UI of the app looks like in light theme in the design tab.
  */
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun WoofLightThemePreview() {
     WoofTheme(darkTheme = false) {
@@ -145,7 +147,7 @@ fun WoofLightThemePreview() {
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun WoofDarkThemePreview() {
     WoofTheme(darkTheme = true) {
